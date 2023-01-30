@@ -1,4 +1,14 @@
-# iex (irm https://raw.githubusercontent.com/everydayintech/OSDCloud-Public/main/oobe/ServiceUITest.ps1); Restart-Computer -Force
+# Usage for Test-Scenario: 
+#   1. Open Command Prompt during OOBE with Shift + F10
+#   2. Open PowerShell and run: iex (irm https://raw.githubusercontent.com/everydayintech/OSDCloud-Public/main/oobe/ServiceUITest.ps1); Restart-Computer -Force
+#   3. Wait for PowerShell to Start automatically after Restart
+
+# Note: for consecutive Tests, you can use the retry.cmd shortcut to start the script again
+
+# Usage for OSDCloud Deployment:
+#   1. Save this Script to Disk during WinPE Phase
+#   2. Run this Script during Windows Specialize Phase using Unattend.xml
+
 
 Start-Transcript -Path 'C:\OSDCloud\temp\ServiceUITest.log' -Append
 
