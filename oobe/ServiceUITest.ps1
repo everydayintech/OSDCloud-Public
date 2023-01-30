@@ -333,8 +333,6 @@ public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
     # #=======================================================================
     # # OOBE Setup Tasks
     # #=======================================================================
-    # Write-Host -ForegroundColor DarkGray "iex (irm 'https://raw.githubusercontent.com/everydayintech/OSDCloud/main/temp/Set-KeyboardLayout.ps1')"
-    # Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/everydayintech/OSDCloud/main/temp/Set-KeyboardLayout.ps1')
 
     # Write-Host -ForegroundColor DarkGray "osdcloud-StartOOBE -Display -DateTime -Autopilot -KeyVault"
     # osdcloud-StartOOBE -Display -DateTime -Autopilot -KeyVault
@@ -432,8 +430,8 @@ public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
     #=======================================================================
     # OOBE Setup Tasks
     #=======================================================================
-    Write-Host -ForegroundColor DarkGray "iex (irm 'https://raw.githubusercontent.com/everydayintech/OSDCloud/main/temp/Set-KeyboardLayout.ps1')"
-    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/everydayintech/OSDCloud/main/temp/Set-KeyboardLayout.ps1')
+    Write-Host -ForegroundColor DarkGray "iex (irm 'https://raw.githubusercontent.com/everydayintech/OSDCloud-Public/main/raw/Set-KeyboardLayout.ps1')"
+    Invoke-Expression (Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/everydayintech/OSDCloud-Public/main/raw/Set-KeyboardLayout.ps1')
 
     Write-Host -ForegroundColor DarkGray "osdcloud-StartOOBE -Display -DateTime -Autopilot -KeyVault"
     osdcloud-StartOOBE -Autopilot -KeyVault
