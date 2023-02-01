@@ -160,10 +160,9 @@ Write-Host -ForegroundColor DarkGray "Setting ServiceUIScheduledTask.ps1"
 $ScheduledTaskScript = {
     Start-Transcript -Path 'C:\OSDCloud\temp\ServiceUIScheduledTask.log' -Append
 
-    Write-Host -ForegroundColor DarkGray "Unregistering OSD ServiceUI Scheduled Task"
+    # Write-Host -ForegroundColor DarkGray "Unregistering OSD ServiceUI Scheduled Task"
     # Unregister-ScheduledTask -TaskName "OSD ServiceUI" -Confirm:$false
 
-    #$ProcessAttachTo = 'RuntimeBroker.exe'
     $ProcessAttachTo = 'WWAHost.exe'
 
     do {
