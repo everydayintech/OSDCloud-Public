@@ -204,14 +204,13 @@ public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
 
     } until(Get-Process -Name ($ProcessAttachTo.Split('.')[0]) -ErrorAction 'silentlycontinue')
 
+    Get-Process -Name WWAHost       | %{Set-WindowStyle MINIMIZE $PSItem.MainWindowHandle}
 
     reg add "HKCU\SOFTWARE\Sysinternals\Process Monitor" /v EulaAccepted /t REG_DWORD /d 1 /f
 
     Write-Host -ForegroundColor DarkGray "Found $ProcessAttachTo running, launching ServiceUI64.exe to start Procmon64.exe"
     Write-Host -ForegroundColor DarkGray "ServiceUI64.exe -process:$ProcessAttachTo C:\OSDCloud\temp\Procmon64.exe"
     C:\OSDCloud\temp\ServiceUI64.exe -process:RuntimeBroker.exe C:\OSDCloud\temp\Procmon64.exe
-
-    Get-Process -Name WWAHost       | %{Set-WindowStyle MINIMIZE $PSItem.MainWindowHandle}
 
     Stop-Transcript
 }
