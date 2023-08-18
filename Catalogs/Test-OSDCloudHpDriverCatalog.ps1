@@ -1,15 +1,15 @@
 function Test-OSDCloudHpDriverCatalog {
     <#
     .SYNOPSIS
-        Verifies availability of all Surface Driver Packs
+        Verifies availability of all HP Driver Packs
     .DESCRIPTION
-        Verifies that all Surface Driver Packs are available for download in the MicrosoftDriverPackCatalog.json file
+        Verifies that all HP Driver Packs are available for download in the MicrosoftDriverPackCatalog.json file
     .NOTES
         Written by Joël @everydayintech
     .EXAMPLE
         Test-OSDCloudHpDriverCatalog
     .EXAMPLE
-        Test-OSDCloudHpDriverCatalog -CatalogFileUrl 'https://raw.githubusercontent.com/OSDeploy/OSD/c527a9df96be7ffe8e738d8305918065b35f1a09/Catalogs/MicrosoftDriverPackCatalog.json'
+        Test-OSDCloudHpDriverCatalog -CatalogFileUrl 'https://raw.githubusercontent.com/OSDeploy/OSD/c527a9df96be7ffe8e738d8305918065b35f1a09/Catalogs/HPDriverPackCatalog.json'
 
     #>
     
