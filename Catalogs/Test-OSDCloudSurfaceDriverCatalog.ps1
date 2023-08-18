@@ -23,7 +23,7 @@ function Test-OSDCloudSurfaceDriverCatalog {
     foreach ($DriverPack in $Catalog) {
         try {
             $Response = Invoke-WebRequest -Method Head -Uri $DriverPack.Url -UseBasicParsing -ErrorAction Stop
-            
+
             Write-Verbose ('{0} {1}' -f $Response.StatusCode, $DriverPack.Url)
         }
         catch {
@@ -31,6 +31,17 @@ function Test-OSDCloudSurfaceDriverCatalog {
             $AllDriverPacksAvailable = $false
             Write-Warning "DriverPack for $($DriverPack.Name) ($($DriverPack.Product)) is not available at $($DriverPack.Url)"
             Write-Verbose $Err.Exception.Message
+
+            Write-Warning "Download Center URL: $($DriverPack.DownloadCenter)"
+            try {
+                $DownloadCenter = Invoke-WebRequest -Uri $DriverPack.DownloadCenter -UseBasicParsing | Select-Object -ExpandProperty Content
+                $UpdatedOn = $DownloadCenter -match '"detailsSection_file_date":"([\/\d]+)"' | ForEach-Object { $Matches[1] }
+                if (-NOT $UpdatedOn) { throw }
+                Write-Warning "Download updated on: $UpdatedOn"
+            }
+            catch {
+                Write-Warning 'Unable to retrieve Download Center last update date'
+            }
         }
     }
 
