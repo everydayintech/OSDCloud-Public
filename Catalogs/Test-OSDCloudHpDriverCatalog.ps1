@@ -1,4 +1,4 @@
-function Test-OSDCloudSurfaceDriverCatalog {
+function Test-OSDCloudHpDriverCatalog {
     <#
     .SYNOPSIS
         Verifies availability of all Surface Driver Packs
@@ -7,15 +7,15 @@ function Test-OSDCloudSurfaceDriverCatalog {
     .NOTES
         Written by Joël @everydayintech
     .EXAMPLE
-        Test-OSDCloudSurfaceDriverCatalog
+        Test-OSDCloudHpDriverCatalog
     .EXAMPLE
-        Test-OSDCloudSurfaceDriverCatalog -CatalogFileUrl 'https://raw.githubusercontent.com/OSDeploy/OSD/c527a9df96be7ffe8e738d8305918065b35f1a09/Catalogs/MicrosoftDriverPackCatalog.json'
+        Test-OSDCloudHpDriverCatalog -CatalogFileUrl 'https://raw.githubusercontent.com/OSDeploy/OSD/c527a9df96be7ffe8e738d8305918065b35f1a09/Catalogs/MicrosoftDriverPackCatalog.json'
 
     #>
     
     [CmdletBinding()]
     param (
-        [string]$CatalogFileUrl = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/Catalogs/MicrosoftDriverPackCatalog.json'
+        [string]$CatalogFileUrl = 'https://raw.githubusercontent.com/OSDeploy/OSD/master/Catalogs/HPDriverPackCatalog.json'
     )
 
     $ProgressPreference = 'SilentlyContinue'
@@ -36,16 +36,7 @@ function Test-OSDCloudSurfaceDriverCatalog {
             Write-Warning "DriverPack for $($DriverPack.Name) ($($DriverPack.Product)) is not available at $($DriverPack.Url)"
             Write-Verbose $Err.Exception.Message
 
-            Write-Warning "Download Center URL: $($DriverPack.DownloadCenter)"
-            try {
-                $DownloadCenter = Invoke-WebRequest -Uri $DriverPack.DownloadCenter -UseBasicParsing | Select-Object -ExpandProperty Content
-                [datetime]$UpdatedOn = $DownloadCenter -match '"detailsSection_file_date":"([\/\d]+)"' | ForEach-Object { $Matches[1] }
-                if (-NOT $UpdatedOn) { throw }
-                Write-Warning "Download updated on: $($UpdatedOn.ToString('d'))"
-            }
-            catch {
-                Write-Warning 'Unable to retrieve Download Center last update date'
-            }
+            Write-Warning "ReleaseNotesUrl: $($DriverPack.ReleaseNotesUrl)"
         }
     }
 
