@@ -6,8 +6,9 @@ function Update-OSDCloudSurfaceDriverCatalogJustInTime {
 
     $ProgressPreference = 'SilentlyContinue'
 
-    $LocalCloudDriverPacksJson = (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase 'Catalogs\CloudDriverPacks.json')
-    $LocalMicrosoftDriverPacksJson = (Join-Path (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase 'Catalogs\MicrosoftDriverPackCatalog.json')
+    $OSDModuleBase = (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase
+    $LocalCloudDriverPacksJson = (Join-Path $OSDModuleBase 'Catalogs\CloudDriverPacks.json')
+    $LocalMicrosoftDriverPacksJson = (Join-Path $OSDModuleBase 'Catalogs\MicrosoftDriverPackCatalog.json')
 
     $Catalog = Get-Content -Encoding UTF8 -Raw -Path $LocalMicrosoftDriverPacksJson | ConvertFrom-Json
 
@@ -40,8 +41,6 @@ function Update-OSDCloudSurfaceDriverCatalogJustInTime {
                     $content = [System.IO.File]::ReadAllText($LocalCloudDriverPacksJson).Replace($DriverPack.Url, $UpdatedDriverUrl)
                     [System.IO.File]::WriteAllText($LocalCloudDriverPacksJson, $content)
                 }
-                
-                
             }
             catch {
                 Write-Warning 'Unable to retrieve updated download URL'
