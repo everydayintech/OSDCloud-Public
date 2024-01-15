@@ -11,7 +11,7 @@ function Test-OSDCloudLocalSurfaceDriverCatalog {
     $OSDModuleBase = (Get-Module -Name OSD -ListAvailable | Sort-Object Version -Descending | Select-Object -First 1).ModuleBase
     $LocalCloudDriverPacksJson = (Join-Path $OSDModuleBase 'Catalogs\CloudDriverPacks.json')
 
-    $Catalog = Get-Content -Encoding UTF8 -Raw -Path $LocalCloudDriverPacksJson | ConvertFrom-Json | Where-Object {$_.Manufacturer -eq "Microsoft"}
+    $Catalog = (Get-Content -Encoding UTF8 -Raw -Path $LocalCloudDriverPacksJson | ConvertFrom-Json) | Where-Object {$_.Manufacturer -eq "Microsoft"}
 
     foreach ($DriverPack in $Catalog) {
         try {
